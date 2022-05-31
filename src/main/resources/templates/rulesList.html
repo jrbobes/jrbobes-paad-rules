@@ -28,10 +28,9 @@
             <tr th:each="rule : ${rules}">
                 <td th:text="${rule.id}"></td>
                 <td th:text="${rule.name}"></td>
-                <td><a th:href="${'/rule/' + rule.id}">View</a> </td>
+                <td><a th:href="${'/rules/' + rule.id}">View</a> </td>
             </tr>
         </table>
-
     </div>
 </div>
 
