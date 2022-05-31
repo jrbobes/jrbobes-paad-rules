@@ -1,6 +1,4 @@
-package com.jrbobes.jrbobespaadrules;
-
-import org.springframework.context.annotation.Bean;
+package com.jrbobes.paadrules;
 
 public class Rule {
 

@@ -1,5 +1,6 @@
-package com.jrbobes.jrbobespaadrules;
+package com.jrbobes.paadrules.controller;
 
+import com.jrbobes.paadrules.Rule;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
