@@ -19,9 +19,4 @@ public class PaadRulesApplication {
         return String.format("Hello %s!", name);
     }
 
-    @GetMapping("/byebye")
-    public String saludo() {
-        return "Sayonara baby2!";
-    }
-
 }

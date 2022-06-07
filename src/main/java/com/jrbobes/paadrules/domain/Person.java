@@ -6,12 +6,16 @@ public class Person {
     private String name;
     private int age;
 
+    String race;
+
+
     public Person() {
     }
 
-    public Person(String id, String name, int age) {
+    public Person(String id, String name, String race, int age) {
         this.id = id;
         this.name = name;
+        this.race = race;
         this.age = age;
     }
 
@@ -37,5 +41,9 @@ public class Person {
 
     public void setAge(int age) {
         this.age = age;
+    }
+
+    public String getRace() {
+        return this.race;
     }
 }

@@ -9,18 +9,18 @@ import org.jeasy.rules.annotation.Rule;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-@Rule(name = "ageOver18Validation", description = "Validates that the person is older than 18 years")
-    public class AgeOver18Validation {
+@Rule(name = "whiteValidation", description = "Validates that the person is white")
+    public class WhiteValidation {
 
-        private static Logger log = Logger.getLogger(AgeOver18Validation.class.getName());
+        private static Logger log = Logger.getLogger(WhiteValidation.class.getName());
 
         @Condition
-        public boolean isGraterThan18(@Fact("person") Person person) {
-            return (person.getAge() >= 18);
+        public boolean isWhite(@Fact("person") Person person) {
+            return ("White".equals(person.getRace()));
         }
 
         @Action
         public void allowAccess(@Fact("person") Person person) {
-            log.log(Level.INFO, String.format("Allow access to the person %s", person));
+            log.log(Level.INFO, String.format("is WHITE %s", person));
         }
     }
