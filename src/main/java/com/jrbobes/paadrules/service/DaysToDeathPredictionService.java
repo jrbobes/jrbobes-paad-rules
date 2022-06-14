@@ -1,8 +1,8 @@
 package com.jrbobes.paadrules.service;
 
-import com.jrbobes.paadrules.Rule;
 import com.jrbobes.paadrules.domain.Person;
 import com.jrbobes.paadrules.rule.AgeOver18Validation;
+import com.jrbobes.paadrules.rule.WhiteValidation;
 import org.jeasy.rules.api.Facts;
 import org.jeasy.rules.api.Rules;
 import org.jeasy.rules.api.RulesEngine;
@@ -18,13 +18,14 @@ public class DaysToDeathPredictionService {
     public static Rules getRules() {
         Rules rules = new Rules();
         rules.register(new AgeOver18Validation());
+        rules.register(new WhiteValidation());
         return rules;
     }
 
     public static List<Person> getPeople() {
-        List<Person> people = new ArrayList();
+        List<Person> people = new ArrayList<>();
         people.add(new Person("Alex", "bautista", "White",18));
-        people.add(new Person("Juan", "ramírez", "Black", 27));
+        people.add(new Person("Juan", "ramirez", "Black", 27));
         people.add(new Person("Arturo", "juarez", "White", 15));
         people.add(new Person("Edgar", "sanchez", "White", 18));
         people.add(new Person("Oscar", "perez", "Black", 4));
@@ -38,6 +39,7 @@ public class DaysToDeathPredictionService {
             Facts fact = new Facts();
             fact.put("person", person);
             rulesEngine.fire(getRules(), fact);
+            System.out.println("Persona: " + person.getName());
         }
         System.out.println("End rules engine!");
     }

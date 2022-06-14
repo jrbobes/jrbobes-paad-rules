@@ -8,6 +8,7 @@ public class Person {
 
     String race;
 
+    boolean isAdult;
 
     public Person() {
     }
@@ -17,6 +18,7 @@ public class Person {
         this.name = name;
         this.race = race;
         this.age = age;
+        this.isAdult = false;
     }
 
     public String getId() {
@@ -45,5 +47,13 @@ public class Person {
 
     public String getRace() {
         return this.race;
+    }
+
+    public void setAdult(boolean isAdult) {
+        this.isAdult = isAdult;
+    }
+
+    public Boolean isAdult() {
+        return isAdult;
     }
 }

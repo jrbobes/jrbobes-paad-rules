@@ -15,12 +15,13 @@ import java.util.logging.Logger;
         private static Logger log = Logger.getLogger(AgeOver18Validation.class.getName());
 
         @Condition
-        public boolean isGraterThan18(@Fact("person") Person person) {
+        public boolean isGreaterThan18(@Fact("person") Person person) {
             return (person.getAge() >= 18);
         }
 
         @Action
         public void allowAccess(@Fact("person") Person person) {
-            log.log(Level.INFO, String.format("Allow access to the person %s", person));
+            log.log(Level.INFO, String.format("Allow access (>18) to the person %s", person));
+            person.setAdult(true);
         }
     }

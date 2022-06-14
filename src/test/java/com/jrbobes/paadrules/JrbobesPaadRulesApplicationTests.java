@@ -2,8 +2,8 @@ package com.jrbobes.paadrules;
 
 import com.jrbobes.paadrules.domain.Person;
 import com.jrbobes.paadrules.rule.AgeOver18Validation;
+import com.jrbobes.paadrules.rule.AgeOver23Validation;
 import com.jrbobes.paadrules.rule.WhiteValidation;
-import com.jrbobes.paadrules.service.DaysToDeathPredictionService;
 import org.jeasy.rules.api.Facts;
 import org.jeasy.rules.api.Rules;
 import org.jeasy.rules.api.RulesEngine;
@@ -34,7 +34,6 @@ class JrbobesPaadRulesApplicationTests {
         Facts fact = new Facts();
         fact.put("person", new Person("Menor", "Menor", "White", 14));
         rulesEngine.fire(new Rules(new AgeOver18Validation()), fact);
-        System.out.println("End rules engine!");
     }
 
     @Test
@@ -45,11 +44,10 @@ class JrbobesPaadRulesApplicationTests {
         org.jeasy.rules.api.Rule ageOver21 = new RuleBuilder()
                 .name("Over 21")
                 .description("If a person is over 21.")
-                .when(facts -> Integer.parseInt(facts.get("person.age")) > 21)
+                .when(facts -> ((Person) facts.get("person")).getAge() > 21)
                 .then(facts -> System.out.println(String.valueOf(facts.get("person.name"))))
                 .build();
         rulesEngine.fire(new Rules(ageOver21), fact);
-        System.out.println("End rules engine!");
     }
 
     @Test
@@ -59,13 +57,18 @@ class JrbobesPaadRulesApplicationTests {
 
         //Create a composite rule from two primitive rules
         UnitRuleGroup myUnitRuleGroup = new UnitRuleGroup("myUnitRuleGroup", "unit of myRule1 and myRule2");
-        myUnitRuleGroup.addRule(new Rules(new AgeOver18Validation()));
-        myUnitRuleGroup.addRule(new Rules(new WhiteValidation()));
+        myUnitRuleGroup.addRule(new AgeOver18Validation());
+        myUnitRuleGroup.addRule(new WhiteValidation());
+        myUnitRuleGroup.addRule(new AgeOver23Validation());
 
         Rules rules = new Rules();
         rules.register(myUnitRuleGroup);
 
         RulesEngine rulesEngine = new DefaultRulesEngine();
         rulesEngine.fire(rules, someFacts);
+
+        Person person = (Person) someFacts.get("person");
+        assertEquals(Boolean.TRUE, person.isAdult());
+        assertEquals("White", person.getRace());
     }
 }
